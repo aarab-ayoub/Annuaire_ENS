@@ -1,13 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="com.company.model.Filiere" %>
+<%@ page import="com.company.model.Departement" %>
 <%@ page import="com.company.dao.FiliereDAO" %>
+<%@ page import="com.company.dao.DepartementDAO" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Iterator" %>
 
 <%
     FiliereDAO filiereDAO = new FiliereDAO();
-    List<Filiere> filieres = filiereDAO.getAllFilieres();
+    DepartementDAO departementDAO = new DepartementDAO();
+    List<Filiere> filieres = null;
+    List<Departement> departements = departementDAO.getAllDepartements();
+    String selectedDepartmentId = request.getParameter("department");
+
+    if (selectedDepartmentId != null && !selectedDepartmentId.isEmpty()) {
+        int departmentId = Integer.parseInt(selectedDepartmentId);
+        if (departmentId != 0) {
+            filieres = filiereDAO.getFilieresByDepartment(departmentId);
+        } else {
+            filieres = filiereDAO.getAllFilieres();
+        }
+    } else {
+        filieres = filiereDAO.getAllFilieres();
+    }
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,8 +34,8 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
-<header>
-     <nav class="bg-white shadow">
+  <header>
+    <nav class="bg-white shadow">
       <div class="container mx-auto px-4">
         <div class="flex justify-between items-center py-4">
           <!-- Logo -->
@@ -44,11 +60,11 @@
                 <!-- Dropdown Menu -->
                 <ul id="utilisationDropdown" class="absolute hidden top-full left-0 bg-white shadow mt-2 py-2 w-48">
                   <li><a href="listeEtudiants.jsp" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Liste des étudiants</a></li>
-                  <li><a href="#" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Recherche d'un étudiant</a></li>
+                  <li><a href="RechercheEtudiant.html" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Recherche d'un étudiant</a></li>
                   <li><a href="listDepartement.jsp" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Liste des départements</a></li>
-                  <li><a href="#" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Recherche d'un département</a></li>
+                  <li><a href="RechercheDepartement.html" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Recherche d'un département</a></li>
                   <li><a href="listeFilieres.jsp" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Liste des filières</a></li>
-                  <li><a href="#" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Recherche d'une filière</a></li>
+                  <li><a href="RechercheFiliere.html" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Recherche d'une filière</a></li>
                 </ul>
               </li>
               <li class="relative">
@@ -66,48 +82,46 @@
       </div>
     </nav>
   </header>
+
 <div class="container mx-auto py-8">
     <h1 class="text-3xl text-center mb-8">Liste des filières par département</h1>
-	<a href="insertionFiliere.jsp" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mb-4 ">Ajouter un étudiant</a>
-	<a href="ListeFilieresServlet" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mb-4 ml-4">Trier par département</a>
+    <!-- Add the dropdown menu for selecting department -->
+    <div class="flex items-center mb-4">
+        <a href="insertionFiliere.jsp" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4">Ajouter une filiere</a>
+        <form action="listeFilieres.jsp" method="get">
+            <select name="department" class="bg-white border border-gray-400 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option value="0" <%= selectedDepartmentId == null || selectedDepartmentId.equals("0") ? "selected" : "" %>>Tous les départements</option>
+                <% for (Departement departement : departements) { %>
+                    <option value="<%= departement.getIdDepartement() %>" <%= selectedDepartmentId != null && selectedDepartmentId.equals(String.valueOf(departement.getIdDepartement())) ? "selected" : "" %>><%= departement.getNomDepartement() %></option>
+                <% } %>
+            </select>
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-4">Trier</button>
+        </form>
+    </div>
     <div class="overflow-x-auto mt-8">
         <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
-            <tr>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    ID
-                </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Nom de la filière
-                </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    ID du département
-                </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Actions
-                </th>
-            </tr>
+                <tr>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nom de la filière</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nom du département</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
-            <% for (Filiere filiere : filieres) { %>
-            <tr>
-            	<td class="px-6 py-4 whitespace-nowrap">
-				    <%= filiere.getId() %>
-				</td>
-				<td class="px-6 py-4 whitespace-nowrap">
-				    <%= filiere.getNom() %>
-				</td>
-				<td class="px-6 py-4 whitespace-nowrap">
-				    <%= filiere.getIdDepartement() %>
-				</td>
-				<td class="px-6 py-4 whitespace-nowrap">
-				  	<form id="deleteForm_<%= filiere.getId() %>" action="SupprimerFiliereServlet" method="post" onsubmit="return confirmDelete('<%= filiere.getId() %>')">
-                        <input type="hidden" name="filiereId" value="<%= filiere.getId() %>">
-                        <button type="submit" class="text-red-600 hover:text-red-900">Supprimer</button>
-                    </form>
-				</td>
-            </tr>
-            <% } %>
+                <% for (Filiere filiere : filieres) { %>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap"><%= filiere.getId() %></td>
+                        <td class="px-6 py-4 whitespace-nowrap"><%= filiere.getNom() %></td>
+                        <td class="px-6 py-4 whitespace-nowrap"><%= departementDAO.getDepartementById(filiere.getIdDepartement()).getNomDepartement() %></td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <form id="deleteForm_<%= filiere.getId() %>" action="SupprimerFiliereServlet" method="post" onsubmit="return confirmDelete('<%= filiere.getId() %>')">
+                                <input type="hidden" name="filiereId" value="<%= filiere.getId() %>">
+                                <button type="submit" class="text-red-600 hover:text-red-900">Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% } %>
             </tbody>
         </table>
     </div>

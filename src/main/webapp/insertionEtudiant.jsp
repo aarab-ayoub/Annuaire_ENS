@@ -29,7 +29,7 @@
     </script>
 </head>
 <body class="bg-gray-100">
-<header>
+ <header>
     <nav class="bg-white shadow">
       <div class="container mx-auto px-4">
         <div class="flex justify-between items-center py-4">
@@ -55,11 +55,11 @@
                 <!-- Dropdown Menu -->
                 <ul id="utilisationDropdown" class="absolute hidden top-full left-0 bg-white shadow mt-2 py-2 w-48">
                   <li><a href="listeEtudiants.jsp" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Liste des étudiants</a></li>
-                  <li><a href="#" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Recherche d'un étudiant</a></li>
+                  <li><a href="RechercheEtudiant.html" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Recherche d'un étudiant</a></li>
                   <li><a href="listDepartement.jsp" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Liste des départements</a></li>
-                  <li><a href="#" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Recherche d'un département</a></li>
+                  <li><a href="RechercheDepartement.html" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Recherche d'un département</a></li>
                   <li><a href="listeFilieres.jsp" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Liste des filières</a></li>
-                  <li><a href="#" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Recherche d'une filière</a></li>
+                  <li><a href="RechercheFiliere.html" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Recherche d'une filière</a></li>
                 </ul>
               </li>
               <li class="relative">
@@ -77,6 +77,7 @@
       </div>
     </nav>
   </header>
+
 <div class="container mx-auto py-8 px-4 md:px-0">
     <h1 class="text-3xl text-center mb-8">Insertion d'un nouvel étudiant</h1>
     <form action="InsertionEtudiantServlet" method="post" class="mx-auto max-w-md" onsubmit="return validateForm()">
