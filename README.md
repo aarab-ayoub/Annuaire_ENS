@@ -13,7 +13,7 @@ This is a simple web application for managing student information within a unive
 - **Java Servlets:** Used for server-side processing and handling of HTTP requests.
 - **JSP (JavaServer Pages):** Used for dynamic generation of web pages.
 - **MySQL Database:** Used for storing student and department information.
-- **HTML/CSS:** Used for front-end design and layout.
+- **HTML:** Used for front-end design and layout.
 - **Tailwind CSS:** Used for styling and responsive design.
 
 ## Usage
