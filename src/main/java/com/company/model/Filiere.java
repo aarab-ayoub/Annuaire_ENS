@@ -5,7 +5,15 @@ public class Filiere {
     private int id;
     private String nom;
     private int idDepartement;
-    
+    private String nomDepartement;
+
+    public String getNomDepartement() {
+        return nomDepartement;
+    }
+
+    public void setNomDepartement(String nomDepartement) {
+        this.nomDepartement = nomDepartement;
+    }
 	public int getId() {
 		return id;
 	}

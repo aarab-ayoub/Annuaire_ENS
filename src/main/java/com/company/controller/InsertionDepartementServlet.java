@@ -36,8 +36,10 @@ public class InsertionDepartementServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 String nomDepartement = request.getParameter("nomDepartement");
+	 protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	            throws ServletException, IOException {
+
+	        String nomDepartement = request.getParameter("nomDepartement");
 
 	        Departement departement = new Departement();
 	        departement.setNomDepartement(nomDepartement);
@@ -45,10 +47,10 @@ public class InsertionDepartementServlet extends HttpServlet {
 	        DepartementDAO departementDAO = new DepartementDAO();
 	        try {
 	            departementDAO.insertDepartement(departement);
-	            response.sendRedirect("listDepartement.jsp");
+	            response.sendRedirect("listDepartement.jsp"); // Redirect to a page after insertion
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
-	}
+	    }
 
 }

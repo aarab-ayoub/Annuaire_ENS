@@ -69,6 +69,29 @@ public class EtudiantDAO {
             }
         }
     }
+    
+    public List<Etudiant> rechercherEtudiantParNom(String nom) throws SQLException {
+        List<Etudiant> etudiants = new ArrayList<>();
+        String sql = "SELECT * FROM etudiant WHERE nom LIKE ?";
 
+        try (Connection conn = DBUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, "%" + nom + "%");
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Etudiant etudiant = new Etudiant();
+                    etudiant.setCne(rs.getInt("cne"));
+                    etudiant.setNom(rs.getString("nom"));
+                    etudiant.setPrenom(rs.getString("prenom"));
+                    etudiant.setFiliere(rs.getString("filiere"));
+                    etudiant.setDepartement(rs.getString("departement"));
+                    etudiant.setTelephone(rs.getString("telephone"));
+                    etudiants.add(etudiant);
+                }
+            }
+        }
+
+        return etudiants;
+    }
 
 }

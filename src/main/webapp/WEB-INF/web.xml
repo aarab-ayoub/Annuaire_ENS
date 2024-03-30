@@ -59,4 +59,25 @@
     <servlet-name>SuppressionEtudiantServlet</servlet-name>
     <url-pattern>/SuppressionEtudiantServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>InsertionDepartementServlet</display-name>
+    <servlet-name>InsertionDepartementServlet</servlet-name>
+    <servlet-class>com.company.controller.InsertionDepartementServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>InsertionDepartementServlet</servlet-name>
+    <url-pattern>/InsertionDepartementServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <description></description>
+    <display-name>SuppressionDepartementServlet</display-name>
+    <servlet-name>SuppressionDepartementServlet</servlet-name>
+    <servlet-class>com.company.controller.SuppressionDepartementServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SuppressionDepartementServlet</servlet-name>
+    <url-pattern>/SuppressionDepartementServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
