@@ -31,6 +31,17 @@ public class FiliereDAO {
 
         return filieres;
     }
+    
+    public void insertFiliere(Filiere filiere) throws SQLException {
+        String sql = "INSERT INTO filiere (nom_filiere, id_departement) VALUES (?, ?)";
+        try (Connection conn = DBUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, filiere.getNom());
+            stmt.setInt(2, filiere.getIdDepartement());
+            stmt.executeUpdate();
+        }
+    }
+    
     public List<Filiere> getFilieresByDepartment(int departmentId) throws SQLException {
         List<Filiere> filieres = new ArrayList<>();
         String sql = "SELECT * FROM filiere WHERE id_departement = ?";
@@ -51,16 +62,6 @@ public class FiliereDAO {
         }
 
         return filieres;
-    }
-
-    public void insertFiliere(Filiere filiere) throws SQLException {
-        String sql = "INSERT INTO filiere (nom_filiere, id_departement) VALUES (?, ?)";
-        try (Connection conn = DBUtil.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, filiere.getNom());
-            stmt.setInt(2, filiere.getIdDepartement());
-            stmt.executeUpdate();
-        }
     }
 
     public void supprimerFiliere(int filiereId) throws SQLException {

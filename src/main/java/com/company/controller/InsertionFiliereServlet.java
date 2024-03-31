@@ -36,8 +36,10 @@ public class InsertionFiliereServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nomFiliere = request.getParameter("nomFiliere");
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String nomFiliere = request.getParameter("nomFiliere");
         int idDepartement = Integer.parseInt(request.getParameter("idDepartement"));
 
         Filiere filiere = new Filiere();
@@ -51,6 +53,6 @@ public class InsertionFiliereServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-	}
+    }
 
 }
