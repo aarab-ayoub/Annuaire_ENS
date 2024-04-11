@@ -42,7 +42,7 @@
               <li class="relative">
                 <a id="utilisationDropdownTrigger" href="#" class="text-gray-900 hover:text-blue-700">Utilisation</a>
                 <!-- Dropdown Menu -->
-                <ul id="utilisationDropdown" class="absolute hidden top-full left-0 bg-white shadow mt-2 py-2 w-48">
+				<ul id="utilisationDropdown" class="absolute hidden top-full left-0 bg-white shadow mt-2 py-2 w-48 z-10">
                   <li><a href="listeEtudiants.jsp" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Liste des étudiants</a></li>
                   <li><a href="RechercheEtudiant.html" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Recherche d'un étudiant</a></li>
                   <li><a href="listDepartement.jsp" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Liste des départements</a></li>
@@ -54,7 +54,7 @@
               <li class="relative">
                 <a id="adminDropdownTrigger" href="#" class="text-gray-900 hover:text-blue-700">Administration</a>
                 <!-- Dropdown Menu -->
-                <ul id="adminDropdown" class="absolute hidden top-full left-0 bg-white shadow mt-2 py-2 w-48">
+                <ul id="adminDropdown"  class="absolute hidden top-full left-0 bg-white shadow mt-2 py-2 w-48 z-10">
                   <li><a href="insertionEtudiant.jsp" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Insertion d'un nouvel étudiant</a></li>
                   <li><a href="insertionDepartement.jsp" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Insertion d'un nouveau département</a></li>
                   <li><a href="insertionFiliere.jsp" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Insertion d'une nouvelle filière</a></li>
@@ -66,24 +66,24 @@
       </div>
     </nav>
   </header>
-    <div class="container mx-auto px-4 py-8">
-        <h1 class="text-3xl font-bold mb-4">Résultat de la recherche</h1>
-        <% if (etudiants.isEmpty()) { %>
-            <p class="text-red-500">Aucun étudiant trouvé avec ce nom.</p>
-        <% } else { %>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <% for (Etudiant etudiant : etudiants) { %>
-                    <div class="bg-white rounded-lg shadow-md p-4">
-                        <h2 class="text-lg font-bold mb-2"><%= etudiant.getNom() %> <%= etudiant.getPrenom() %></h2>
-                        <p class="text-gray-500 mb-2">CNE : <%= etudiant.getCne() %></p>
-                        <p class="text-gray-500 mb-2">Filière : <%= etudiant.getFiliere() %></p>
-                        <p class="text-gray-500 mb-2">Département : <%= etudiant.getDepartement() %></p>
-                        <p class="text-gray-500 mb-2">Téléphone : <%= etudiant.getTelephone() %></p>
-                    </div>
-                <% } %>
-            </div>
-        <% } %>
-    </div>
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-4 text-black">Résultat de la recherche</h1>
+    <% if (etudiants.isEmpty()) { %>
+        <p class="text-red-500 text-lg mb-8">Aucun étudiant trouvé avec ce nom.</p>
+    <% } else { %>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <% for (Etudiant etudiant : etudiants) { %>
+                <div class="bg-white rounded-lg shadow-lg p-6 transition-transform duration-300 transform hover:-translate-y-2">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-2"><%= etudiant.getNom() %> <%= etudiant.getPrenom() %></h2>
+                    <p class="text-lg text-gray-600 mb-2">CNE : <%= etudiant.getCne() %></p>
+                    <p class="text-lg text-gray-600 mb-2">Filière : <%= etudiant.getFiliere() %></p>
+                    <p class="text-lg text-gray-600 mb-2">Département : <%= etudiant.getDepartement() %></p>
+                    <p class="text-lg text-gray-600 mb-2">Téléphone : <%= etudiant.getTelephone() %></p>
+                </div>
+            <% } %>
+        </div>
+    <% } %>
+</div>
 </body>
 <script>
   // Toggle mobile menu

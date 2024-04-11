@@ -31,6 +31,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liste des filières</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
@@ -145,7 +146,21 @@
   });
   
   function confirmDelete(id) {
-      return confirm("Êtes-vous sûr de vouloir supprimer cette filière ?");
-  }
+	    Swal.fire({
+	      title: 'Êtes-vous sûr ?',
+	      text: 'Vous ne pourrez pas revenir en arrière !',
+	      icon: 'warning',
+	      showCancelButton: true,
+	      confirmButtonColor: '#3085d6',
+	      cancelButtonColor: '#d33',
+	      confirmButtonText: 'Oui, supprimer !',
+	      cancelButtonText: 'Annuler'
+	    }).then((result) => {
+	      if (result.isConfirmed) {
+	        document.getElementById('deleteForm_' + id).submit();
+	      }
+	    });
+	    return false;
+	  }
 </script>
 </html>

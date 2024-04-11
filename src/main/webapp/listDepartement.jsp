@@ -15,6 +15,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liste des départements</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
@@ -87,22 +88,22 @@
 		    </thead>
 		    <tbody class="bg-white divide-y divide-gray-200">
 		        <% for (Departement departement : departements) { %>
-		            <tr>
-		                <td class="px-6 py-4 whitespace-nowrap">
-		                    <%= departement.getIdDepartement() %>
-		                </td>
-		                <td class="px-6 py-4 whitespace-nowrap">
-		                    <%= departement.getNomDepartement() %>
-		                </td>
-		                <td class="px-6 py-4 whitespace-nowrap">
-		                    <!-- Bouton de suppression -->
-		                    <form id="deleteForm_<%= departement.getIdDepartement() %>" action="SuppressionDepartementServlet" method="post" onsubmit="return confirmDelete('<%= departement.getIdDepartement() %>')">
-		                        <input type="hidden" name="id_departement" value="<%= departement.getIdDepartement() %>">
-		                        <button type="submit" class="text-red-600 hover:text-red-900">Supprimer</button>
-		                    </form>
-		                </td>
-		            </tr>
-		        <% } %>
+				    <tr>
+				        <td class="px-6 py-4 whitespace-nowrap">
+				            <%= departement.getIdDepartement() %>
+				        </td>
+				        <td class="px-6 py-4 whitespace-nowrap">
+				            <%= departement.getNomDepartement() %>
+				        </td>
+				        <td class="px-6 py-4 whitespace-nowrap">
+				            <% boolean hasFiliere = departementDAO.hasAssociatedFilieres(departement.getIdDepartement()); %>
+				            <button onclick="return confirmDelete('<%= departement.getIdDepartement() %>', <%= hasFiliere %>)" class="text-red-600 hover:text-red-900">Supprimer</button>
+				            <form id="deleteForm_<%= departement.getIdDepartement() %>" action="SuppressionDepartementServlet" method="post">
+				                <input type="hidden" name="id_departement" value="<%= departement.getIdDepartement() %>">
+				            </form>
+				        </td>
+				    </tr>
+				<% } %>
 		    </tbody>
 		</table>
     </div>
@@ -125,8 +126,33 @@
     document.getElementById('adminDropdown').classList.toggle('hidden');
   });
   
-  function confirmDelete(id) {
-	    return confirm("Êtes-vous sûr de vouloir supprimer ce département ?");
+  function confirmDelete(id, hasFiliere) {
+	    if (hasFiliere) {
+	      Swal.fire({
+	        title: 'Impossible de supprimer !',
+	        text: 'Ce département possède des filières associées.',
+	        icon: 'warning',
+	        confirmButtonText: 'OK'
+	      });
+	    } else {
+	      // If the department does not have associated filières, display confirmation dialog
+	      Swal.fire({
+	        title: 'Êtes-vous sûr ?',
+	        text: 'Vous ne pourrez pas revenir en arrière !',
+	        icon: 'warning',
+	        showCancelButton: true,
+	        confirmButtonColor: '#3085d6',
+	        cancelButtonColor: '#d33',
+	        confirmButtonText: 'Oui, supprimer !',
+	        cancelButtonText: 'Annuler'
+	      }).then((result) => {
+	        // If user confirms deletion, submit the form
+	        if (result.isConfirmed) {
+	          document.getElementById('deleteForm_' + id).submit();
+	        }
+	      });
+	    }
+	    return false;
 	  }
 </script>
 </html>

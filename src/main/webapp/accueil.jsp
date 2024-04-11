@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -13,7 +11,7 @@
     /* Add your custom styles here */
     /* Hero section styles */
     .hero {
-      background-image: url('https://source.unsplash.com/random/1600x900');
+      background-image: url('https://enstetouan.ma/wp-content/uploads/2021/07/Porte-principale-ENS-scaled.jpg');
       background-size: cover;
       background-position: center;
       height: 600px;
@@ -66,21 +64,21 @@
                 <a id="utilisationDropdownTrigger" href="#" class="text-gray-900 hover:text-blue-700">Utilisation</a>
                 <!-- Dropdown Menu -->
                 <ul id="utilisationDropdown" class="absolute hidden top-full left-0 bg-white shadow mt-2 py-2 w-48">
-                  <li><a href="listeEtudiants.jsp" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Liste des ï¿½tudiants</a></li>
-                  <li><a href="RechercheEtudiant.html" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Recherche d'un ï¿½tudiant</a></li>
-                  <li><a href="listDepartement.jsp" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Liste des dï¿½partements</a></li>
-                  <li><a href="RechercheDepartement.html" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Recherche d'un dï¿½partement</a></li>
-                  <li><a href="listeFilieres.jsp" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Liste des filiï¿½res</a></li>
-                  <li><a href="RechercheFiliere.html" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Recherche d'une filiï¿½re</a></li>
+                  <li><a href="listeEtudiants.jsp" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Liste des étudiants</a></li>
+                  <li><a href="RechercheEtudiant.html" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Recherche d'un étudiant</a></li>
+                  <li><a href="listDepartement.jsp" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Liste des départements</a></li>
+                  <li><a href="RechercheDepartement.html" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Recherche d'un département</a></li>
+                  <li><a href="listeFilieres.jsp" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Liste des filières</a></li>
+                  <li><a href="RechercheFiliere.html" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Recherche d'une filière</a></li>
                 </ul>
               </li>
               <li class="relative">
                 <a id="adminDropdownTrigger" href="#" class="text-gray-900 hover:text-blue-700">Administration</a>
                 <!-- Dropdown Menu -->
                 <ul id="adminDropdown" class="absolute hidden top-full left-0 bg-white shadow mt-2 py-2 w-48">
-                  <li><a href="insertionEtudiant.jsp" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Insertion d'un nouvel ï¿½tudiant</a></li>
-                  <li><a href="insertionDepartement.jsp" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Insertion d'un nouveau dï¿½partement</a></li>
-                  <li><a href="insertionFiliere.jsp" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Insertion d'une nouvelle filiï¿½re</a></li>
+                  <li><a href="insertionEtudiant.jsp" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Insertion d'un nouvel étudiant</a></li>
+                  <li><a href="insertionDepartement.jsp" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Insertion d'un nouveau département</a></li>
+                  <li><a href="insertionFiliere.jsp" class="text-gray-700 hover:text-blue-700 px-4 py-2 block">Insertion d'une nouvelle filière</a></li>
                 </ul>
               </li>
             </ul>
@@ -95,66 +93,61 @@
     <section class="hero">
       <div class="container mx-auto">
         <div class="hero-content">
-          <h1 class="text-5xl font-bold mb-4">Bienvenue ï¿½ l'ENS Mini Annuaire</h1>
-          <p class="text-lg text-gray-200">Trouvez facilement des informations sur les ï¿½tudiants, les dï¿½partements et les filiï¿½res.</p>
+          <h1 class="text-5xl font-bold mb-4">Bienvenue à l'ENS Mini Annuaire</h1>
+          <p class="text-lg text-gray-200">Trouvez facilement des informations sur les étudiants, les départements et les filières.</p>
         </div>
       </div>
     </section>
 
     <!-- Features section -->
     <section class="container mx-auto my-16">
-      <h2 class="text-3xl font-semibold mb-8 text-center">Fonctionnalitï¿½s principales</h2>
+      <h2 class="text-3xl font-semibold mb-8 text-center">Fonctionnalités principales</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
         <!-- Feature card 1 -->
         <div class="feature-card p-6 shadow-lg">
-          <h3 class="text-xl font-semibold mb-4">Liste des ï¿½tudiants</h3>
-          <p class="text-gray-700">Accï¿½dez ï¿½ une liste complï¿½te de tous les ï¿½tudiants.</p>
-        </div>
-        <!-- Feature card 
-        <!-- Feature card 1 -->
-        <div class="feature-card p-6 shadow-lg">
-          <h3 class="text-xl font-semibold mb-4">Liste des ï¿½tudiants</h3>
-          <p class="text-gray-700">Accï¿½dez ï¿½ une liste complï¿½te de tous les ï¿½tudiants.</p>
+          <h3 class="text-xl font-semibold mb-4">Liste des étudiants</h3>
+          <p class="text-gray-700">Accédez à une liste complète de tous les étudiants.</p>
         </div>
 
         <!-- Feature card 2 -->
         <div class="feature-card p-6 shadow-lg">
-          <h3 class="text-xl font-semibold mb-4">Recherche d'un ï¿½tudiant</h3>
-          <p class="text-gray-700">Trouvez un ï¿½tudiant en saisissant son nom.</p>
+          <h3 class="text-xl font-semibold mb-4">Recherche d'un étudiant</h3>
+          <p class="text-gray-700">Trouvez un étudiant en saisissant son nom.</p>
         </div>
 
         <!-- Feature card 3 -->
         <div class="feature-card p-6 shadow-lg">
-          <h3 class="text-xl font-semibold mb-4">Liste des dï¿½partements</h3>
-          <p class="text-gray-700">Consultez la liste de tous les dï¿½partements.</p>
+          <h3 class="text-xl font-semibold mb-4">Liste des départements</h3>
+          <p class="text-gray-700">Consultez la liste de tous les départements.</p>
         </div>
 
         <!-- Feature card 4 -->
         <div class="feature-card p-6 shadow-lg">
-          <h3 class="text-xl font-semibold mb-4">Recherche d'un dï¿½partement</h3>
-          <p class="text-gray-700">Recherchez un dï¿½partement par son nom.</p>
+          <h3 class="text-xl font-semibold mb-4">Recherche d'un département</h3>
+          <p class="text-gray-700">Recherchez un département par son nom.</p>
         </div>
 
         <!-- Feature card 5 -->
         <div class="feature-card p-6 shadow-lg">
-          <h3 class="text-xl font-semibold mb-4">Liste des filiï¿½res</h3>
-          <p class="text-gray-700">Dï¿½couvrez toutes les filiï¿½res disponibles.</p>
+          <h3 class="text-xl font-semibold mb-4">Liste des filières</h3>
+          <p class="text-gray-700">Découvrez toutes les filières disponibles.</p>
         </div>
 
         <!-- Feature card 6 -->
         <div class="feature-card p-6 shadow-lg">
-          <h3 class="text-xl font-semibold mb-4">Recherche d'une filiï¿½re</h3>
-          <p class="text-gray-700">Recherchez une filiï¿½re par son nom.</p>
+          <h3 class="text-xl font-semibold mb-4">Recherche d'une filière</h3>
+          <p class="text-gray-700">Recherchez une filière par son nom.</p>
         </div>
       </div>
     </section>
-     <!-- Contact Section -->
+
+    <!-- Contact Section -->
     <section class="bg-gray-100 py-20">
       <div class="container mx-auto px-4">
         <div class="flex flex-col md:flex-row justify-between items-center">
           <div class="w-full md:w-1/2">
             <h2 class="text-3xl font-semibold mb-6">Contactez-nous</h2>
-            <p class="text-gray-700 mb-6">Vous avez des questions ou des commentaires ? N'hï¿½sitez pas ï¿½ nous contacter. Nous sommes lï¿½ pour vous aider !</p>
+            <p class="text-gray-700 mb-6">Vous avez des questions ou des commentaires ? N'hésitez pas à nous contacter. Nous sommes là pour vous aider !</p>
             <ul class="text-gray-700">
               <li class="mb-2">
                 <svg class="w-5 h-5 inline-block mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15.09V15c0-.55-.45-1-1-1H8c-.55 0-1 .45-1 1v2.09c0 .53.45.97 1 .97h4c.55 0 1-.44 1-.97zM12 12c-.83 0-1.5-.67-1.5-1.5S11.17 9 12 9s1.5.67 1.5 1.5S12.83 12 12 12zm5.25 3c-.17-1.81-1.43-3.22-3-3.5 1.57-.28 2.83-1.69 3-3.5h2c-.17 2.9-2.31 5.22-5 5.72V17c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-2h-.75z"></path></svg>
@@ -217,4 +210,3 @@
 
 </body>
 </html>
-        

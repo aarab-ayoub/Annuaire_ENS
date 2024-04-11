@@ -99,5 +99,37 @@ public class DepartementDAO {
 
         return departement;
     }
+    
+    public boolean hasAssociatedFilieres(int idDepartement) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        boolean hasFilieres = false;
 
+        try {
+            conn = DBUtil.getConnection();
+            String sql = "SELECT COUNT(*) FROM filiere WHERE id_departement = ?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, idDepartement);
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                if (count > 0) {
+                    hasFilieres = true;
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stmt != null) {
+                stmt.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        
+        return hasFilieres;
+    }
 }
