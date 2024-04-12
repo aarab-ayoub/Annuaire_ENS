@@ -15,6 +15,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liste des étudiants</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
@@ -119,7 +120,7 @@
                     <%= etudiant.getTelephone() %>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                    <a href="SuppressionEtudiantServlet?cne=<%= etudiant.getCne() %>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet étudiant ?')" class="text-red-600 hover:text-red-900">Supprimer</a>
+                    <a href="SuppressionEtudiantServlet?cne=<%= etudiant.getCne() %>" onclick="return confirmDelete('<%= etudiant.getCne() %>')" class="text-red-600 hover:text-red-900">Supprimer</a>
                 </td>
             </tr>
             <% } %>
@@ -144,5 +145,27 @@
     document.getElementById('utilisationDropdown').classList.add('hidden');
     document.getElementById('adminDropdown').classList.toggle('hidden');
   });
+  
+  function confirmDelete(cne) {
+	    // Display confirmation dialog using SweetAlert
+	    Swal.fire({
+	      title: 'Êtes-vous sûr ?',
+	      text: 'Vous ne pourrez pas revenir en arrière !',
+	      icon: 'warning',
+	      showCancelButton: true,
+	      confirmButtonColor: '#3085d6',
+	      cancelButtonColor: '#d33',
+	      confirmButtonText: 'Oui, supprimer !',
+	      cancelButtonText: 'Annuler'
+	    }).then((result) => {
+	      // If user confirms deletion, proceed with the deletion process
+	      if (result.isConfirmed) {
+	        window.location.href = 'SuppressionEtudiantServlet?cne=' + cne;
+	      }
+	    });
+	    // Prevent default link behavior
+	    return false;
+	  }
+
 </script>
 </html>
