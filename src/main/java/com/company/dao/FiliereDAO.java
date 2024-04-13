@@ -64,14 +64,6 @@ public class FiliereDAO {
         return filieres;
     }
 
-    public void supprimerFiliere(int filiereId) throws SQLException {
-        String sql = "DELETE FROM filiere WHERE id_filiere = ?";
-        try (Connection conn = DBUtil.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, filiereId);
-            stmt.executeUpdate();
-        }
-    }
     public List<Filiere> getFiliereByName(String nom) throws SQLException {
         List<Filiere> filieres = new ArrayList<>();
         String sql = "SELECT f.*, d.nom_departement FROM filiere f INNER JOIN departement d ON f.id_departement = d.id_departement WHERE f.nom_filiere LIKE ?";
@@ -92,6 +84,26 @@ public class FiliereDAO {
         }
 
         return filieres;
+    }
+ 
+    public void deleteFiliere(int filiereId) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+
+        try {
+            conn = DBUtil.getConnection();
+            String sql = "DELETE FROM filiere WHERE id_filiere = ?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, filiereId);
+            stmt.executeUpdate();
+        } finally {
+            if (stmt != null) {
+                stmt.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
     }
 
 }

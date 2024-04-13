@@ -36,15 +36,17 @@ public class SupprimerFiliereServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 int filiereId = Integer.parseInt(request.getParameter("filiereId"));
-	        
-	        try {
-	            FiliereDAO filiereDAO = new FiliereDAO();
-	            filiereDAO.supprimerFiliere(filiereId);
-	            response.sendRedirect("listeFilieres.jsp");
-	        } catch (SQLException ex) {
-	            ex.printStackTrace();
-	        }
-	}
+        int filiereId = Integer.parseInt(request.getParameter("filiereId"));
+
+        FiliereDAO filiereDAO = new FiliereDAO();
+
+        try {
+            filiereDAO.deleteFiliere(filiereId);
+            response.sendRedirect("listeFilieres.jsp");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            response.sendRedirect("errorPage.jsp");
+        }
+    }
 
 }
