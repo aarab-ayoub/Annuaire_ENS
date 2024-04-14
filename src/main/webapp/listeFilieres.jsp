@@ -115,12 +115,13 @@
                         <td class="px-6 py-4 whitespace-nowrap"><%= filiere.getId() %></td>
                         <td class="px-6 py-4 whitespace-nowrap"><%= filiere.getNom() %></td>
                         <td class="px-6 py-4 whitespace-nowrap"><%= departementDAO.getDepartementById(filiere.getIdDepartement()).getNomDepartement() %></td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <form id="deleteForm_<%= filiere.getId() %>" action="SupprimerFiliereServlet" method="post" onsubmit="return confirmDelete('<%= filiere.getId() %>')">
-                                <input type="hidden" name="filiereId" value="<%= filiere.getId() %>">
-                                <button type="submit" class="text-red-600 hover:text-red-900">Supprimer</button>
-                            </form>
-                        </td>
+                       <td class="px-6 py-4 whitespace-nowrap">
+				            <% boolean hasRecords = filiereDAO.hasAssociatedRecords(filiere.getId()); %>
+				            <button onclick="return confirmDelete('<%= filiere.getId() %>', <%= hasRecords %>)" class="text-red-600 hover:text-red-900">Supprimer</button>
+				            <form id="deleteForm_<%= filiere.getId() %>" action="SupprimerFiliereServlet" method="post">
+				                <input type="hidden" name="filiereId" value="<%= filiere.getId() %>">
+				            </form>
+				        </td>
                     </tr>
                 <% } %>
             </tbody>
@@ -145,21 +146,33 @@
     document.getElementById('adminDropdown').classList.toggle('hidden');
   });
   
-  function confirmDelete(id) {
-	    Swal.fire({
-	      title: 'Êtes-vous sûr ?',
-	      text: 'Vous ne pourrez pas revenir en arrière !',
-	      icon: 'warning',
-	      showCancelButton: true,
-	      confirmButtonColor: '#3085d6',
-	      cancelButtonColor: '#d33',
-	      confirmButtonText: 'Oui, supprimer !',
-	      cancelButtonText: 'Annuler'
-	    }).then((result) => {
-	      if (result.isConfirmed) {
-	        document.getElementById('deleteForm_' + id).submit();
-	      }
-	    });
+  function confirmDelete(id, hasRecords) {
+	    if (hasRecords) {
+	      // Display SweetAlert warning dialog
+	      Swal.fire({
+	        title: 'Impossible de supprimer !',
+	        text: 'Cette filière a des enregistrements associés.',
+	        icon: 'warning',
+	        confirmButtonText: 'OK'
+	      });
+	    } else {
+	      // If the filière does not have associated records, display confirmation dialog
+	      Swal.fire({
+	        title: 'Êtes-vous sûr ?',
+	        text: 'Vous ne pourrez pas revenir en arrière !',
+	        icon: 'warning',
+	        showCancelButton: true,
+	        confirmButtonColor: '#3085d6',
+	        cancelButtonColor: '#d33',
+	        confirmButtonText: 'Oui, supprimer !',
+	        cancelButtonText: 'Annuler'
+	      }).then((result) => {
+	        // If user confirms deletion, submit the form
+	        if (result.isConfirmed) {
+	          document.getElementById('deleteForm_' + id).submit();
+	        }
+	      });
+	    }
 	    return false;
 	  }
 </script>

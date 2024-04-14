@@ -105,5 +105,38 @@ public class FiliereDAO {
             }
         }
     }
+    
+    public boolean hasAssociatedRecords(int filiereId) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        boolean hasRecords = false;
+
+        try {
+            conn = DBUtil.getConnection();
+            String sql = "SELECT COUNT(*) FROM etudiant WHERE id_filiere = ?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, filiereId);
+            rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                hasRecords = count > 0;
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stmt != null) {
+                stmt.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
+        return hasRecords;
+    }
+
 
 }
