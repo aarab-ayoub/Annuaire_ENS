@@ -16,3 +16,4 @@ Commit made on 2024-05-26T20:23:08 with message: Updated configuration for produ
 Commit made on 2024-05-26T20:23:08 with message: Refactored servlet for better readability
 Commit made on 2024-05-26T20:23:08 with message: Added unit tests for user service
 Commit made on 2024-05-26T20:23:08 with message: Updated documentation for API endpoints
+Commit made on 2024-05-26T20:23:08 with message: Fixed bug in user authentication
