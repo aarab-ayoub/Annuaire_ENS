@@ -28,6 +28,5 @@ for _ in range(num_commits):
     with open('file.txt', 'a') as file:
         file.write(f"Commit made on {four_days_ago} with message: {message}\n")
     os.system('git add .')
-    os.system(f'GIT_COMMITTER_DATE="{four_days_ago}" git commit --date="{four_days_ago}" -m "{message}"')
+    os.system(f'set GIT_COMMITTER_DATE={four_days_ago} && git commit --date="{four_days_ago}" -m "{message}"')
 
-os.system('git push -u origin main')
